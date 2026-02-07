@@ -53,8 +53,10 @@ Estudiante *insertar(Estudiante *raiz, int carnet, char nombre[], float nota)
 }
 
 // 2. Mostrar todos los estudiantes en orden de carnet
-    void mostrarEstudiantes(Estudiante* raiz) {
-    if (raiz != NULL) {
+void mostrarEstudiantes(Estudiante *raiz)
+{
+    if (raiz != NULL)
+    {
         mostrarEstudiantes(raiz->izquierdo);
         cout << "Carnet: " << raiz->carnet
              << " | Nombre: " << raiz->nombre
@@ -66,7 +68,26 @@ Estudiante *insertar(Estudiante *raiz, int carnet, char nombre[], float nota)
 // 3. Buscar un estudiante por carnet y mostrar sus datos
 void buscarEstudiante(Estudiante *raiz, int carnet)
 {
-    // Tu código aquí
+    if (raiz == NULL)
+    {
+        cout << "Estudiante no encontrado.\n";
+        return;
+    }
+
+    if (carnet == raiz->carnet)
+    {
+        cout << "Carnet: " << raiz->carnet
+             << "\nNombre: " << raiz->nombre
+             << "\nNota: " << raiz->nota << endl;
+    }
+    else if (carnet < raiz->carnet)
+    {
+        buscarEstudiante(raiz->izquierdo, carnet);
+    }
+    else
+    {
+        buscarEstudiante(raiz->derecho, carnet);
+    }
 }
 
 // 4. Mostrar estudiantes aprobados (nota >= 6.0)
