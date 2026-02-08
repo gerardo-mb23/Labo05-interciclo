@@ -171,8 +171,85 @@ int main()
         cout << "Opcion: ";
         cin >> opcion;
 
-        // Implementa el switch con las opciones
+        switch (opcion)
+        {
 
+        case 1:
+        {
+            int carnet;
+            char nombre[50];
+            float nota;
+
+            cout << "Carnet: ";
+            cin >> carnet;
+            cin.ignore();
+
+            cout << "Nombre: ";
+            cin.getline(nombre, 50);
+
+            cout << "Nota: ";
+            cin >> nota;
+
+            sistema = insertar(sistema, carnet, nombre, nota);
+            break;
+        }
+
+        case 2:
+            mostrarEstudiantes(sistema);
+            break;
+
+        case 3:
+        {
+            int carnet;
+            cout << "Carnet a buscar: ";
+            cin >> carnet;
+            buscarEstudiante(sistema, carnet);
+            break;
+        }
+
+        case 4:
+            mostrarAprobados(sistema);
+            break;
+
+        case 5:
+            mostrarReprobados(sistema);
+            break;
+
+        case 6:
+        {
+            int contador = 0;
+            float suma = calcularPromedio(sistema, &contador);
+
+            if (contador > 0)
+                cout << "Promedio general: " << (suma / contador) << endl;
+            else
+                cout << "No hay estudiantes registrados.\n";
+            break;
+        }
+
+        case 7:
+        {
+            Estudiante *mejor = encontrarMejorNota(sistema);
+            if (mejor != NULL)
+            {
+                cout << "Mejor estudiante:\n";
+                cout << mejor->carnet << " - " << mejor->nombre
+                     << " (" << mejor->nota << ")\n";
+            }
+            else
+            {
+                cout << "No hay estudiantes.\n";
+            }
+            break;
+        }
+
+        case 8:
+            cout << "Saliendo del sistema...\n";
+            break;
+
+        default:
+            cout << "Opcion invalida.\n";
+        }
     } while (opcion != 8);
 
     return 0;
