@@ -121,8 +121,10 @@ void mostrarReprobados(Estudiante *raiz)
 }
 
 // 6. Calcular el promedio de todas las notas
-float calcularPromedio(Estudiante* raiz, int* contador) {
-    if (raiz == NULL) return 0;
+float calcularPromedio(Estudiante *raiz, int *contador)
+{
+    if (raiz == NULL)
+        return 0;
 
     float sumaIzq = calcularPromedio(raiz->izquierdo, contador);
     float sumaDer = calcularPromedio(raiz->derecho, contador);
@@ -134,7 +136,19 @@ float calcularPromedio(Estudiante* raiz, int* contador) {
 // 7. Encontrar al estudiante con la nota más alta
 Estudiante *encontrarMejorNota(Estudiante *raiz)
 {
-    // Tu código aquí
+    if (raiz == NULL)
+        return NULL;
+
+    Estudiante *mejor = raiz;
+    Estudiante *izq = encontrarMejorNota(raiz->izquierdo);
+    Estudiante *der = encontrarMejorNota(raiz->derecho);
+
+    if (izq != NULL && izq->nota > mejor->nota)
+        mejor = izq;
+    if (der != NULL && der->nota > mejor->nota)
+        mejor = der;
+
+    return mejor;
 }
 
 int main()
